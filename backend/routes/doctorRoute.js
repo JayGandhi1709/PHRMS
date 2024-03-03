@@ -16,6 +16,7 @@ const {
   add_prescription,
   view_prescription,
 } = require("../controllers/prescriptionControllers");
+const { requireAuth } = require("../middlewares/AuthMiddleware");
 
 const router = Router();
 
@@ -27,13 +28,13 @@ router.post("/resetPassword/:userType/:id/:token", reset_password);
 
 router.get("/resetPassword/:userType/:id/:token", reset_user_valid);
 
-router.get("/searchpatient/:healthID", requireDoctorAuth, search_patient);
+router.get("/searchpatient/:healthID",requireAuth, search_patient);
 router.get(
   "/searchpatientprecription/:healthID/:doctoremail",
   requireDoctorAuth,
   search_patient_precription
 );
-router.get("/viewprescription/:id", requireDoctorAuth, view_prescription);
+router.get("/viewprescription/:id",requireAuth, view_prescription);
 router.get("/getdoctor", requireDoctorAuth, get_doctor);
 router.get("/getpatienthistory", requireDoctorAuth, get_patient_history);
 router.get("/getpatientlist/:doctoremail", requireDoctorAuth, get_patient_list);

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const { isEmail, isMobilePhone } = require("validator");
 const prescriptionSchema = require("./prescription");
 
-
 const patientSchema = new mongoose.Schema({
   healthID: {
     type: String,
@@ -48,34 +47,10 @@ const patientSchema = new mongoose.Schema({
       unique: [true, "This AdharCard is already Registerd on System."],
       required: [true, "Please enter AdharCard Number"],
     },
-    gender : {
-      type:String,
+    gender: {
+      type: String,
       required: [true, "Gender is required"],
-    }
-  },
-  HealthInformation: {
-    bloodGroup: {
-      type: String,
-      required: [true, "Please enter Blood Group"],
     },
-    height: {
-      type: String,
-      // required: [true, "Please enter your Height"],
-    },
-    weight: {
-      type: String,
-      // required: [true, "Please enter your Weight"],
-    },
-    diseases: [
-      {
-        diseaseName: {
-          type: String,
-        },
-        diseaseyrs: {
-          type: Number,
-        },
-      },
-    ],
   },
   AddressInformation: {
     address1: {
@@ -109,13 +84,31 @@ const patientSchema = new mongoose.Schema({
       required: [true, "Please enter complete Address"],
     },
   },
-  setPassword: {
-    password: {
+  HealthInformation: {
+    bloodGroup: {
       type: String,
-      required: [true, "Please enter password"],
-      minlength: [8, "Minimum length of password should must be 8 characters"],
+      required: [true, "Please enter Blood Group"],
     },
+    height: {
+      type: String,
+      // required: [true, "Please enter your Height"],
+    },
+    weight: {
+      type: String,
+      // required: [true, "Please enter your Weight"],
+    },
+    diseases: [
+      {
+        diseaseName: {
+          type: String,
+        },
+        diseaseyrs: {
+          type: Number,
+        },
+      },
+    ],
   },
+
   EmergencyContactDetails: {
     name: {
       firstName: {
@@ -132,11 +125,7 @@ const patientSchema = new mongoose.Schema({
       required: [true, "Mobile Number of contact person is required"],
       minlength: [10, "Please Enter a valid Mobile Phone"],
     },
-    alternatePhoneNumber: {
-      type: Number,
-      // required: [true, "Mobile Number of contact person is required"],
-      minlength: [10, "Please Enter a valid Mobile Phone"],
-    },
+
     email: {
       type: String,
       lowercase: true,
@@ -145,37 +134,12 @@ const patientSchema = new mongoose.Schema({
     relation: {
       type: String,
     },
-    address: {
-      address1: {
-        type: String,
-        required: [true, "Please enter complete Address"],
-      },
-      address2: {
-        type: String,
-        required: [true, "Please enter complete Address"],
-      },
-      city: {
-        type: String,
-        required: [true, "Please enter complete Address of contact person"],
-      },
-      taluka: {
-        type: String,
-        required: [true, "Please enter complete Address of contact person"],
-      },
-      district: {
-        type: String,
-        required: [true, "Please enter complete Address of contact person"],
-      },
-      state: {
-        type: String,
-        required: [true, "Please enter complete Address of contact person"],
-      },
-      pinCode: {
-        type: Number,
-        min: [100000, "Please enter a valid pincode"],
-        max: [999999, "Please enter a valid pincode"],
-        required: [true, "Please Enter complete Address of contact person"],
-      },
+  },
+  setPassword: {
+    password: {
+      type: String,
+      required: [true, "Please enter password"],
+      minlength: [8, "Minimum length of password should must be 8 characters"],
     },
   },
   // prescriptions: [prescriptionSchema],
@@ -183,29 +147,30 @@ const patientSchema = new mongoose.Schema({
 
 patientSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
-  this.setPassword.password = await bcrypt.hash(this.setPassword.password, salt);
+  this.setPassword.password = await bcrypt.hash(
+    this.setPassword.password,
+    salt
+  );
   next();
 });
 
-
-
 // Patient Login Check Code
 patientSchema.statics.login = async function (healthID, password) {
-    const patient = await this.findOne({ healthID:healthID });
-    // console.log(password);
-    if (!healthID) {
-      throw Error("Please enter HealthId");
+  const patient = await this.findOne({ healthID: healthID });
+  // console.log(password);
+  if (!healthID) {
+    throw Error("Please enter HealthId");
+  }
+  if (patient) {
+    // console.log(patient);
+    const auth = await bcrypt.compare(password, patient.setPassword.password);
+    if (auth) {
+      return patient;
     }
-    if (patient) {
-      // console.log(patient);
-      const auth = await bcrypt.compare(password, patient.setPassword.password);
-      if (auth) {
-        return patient;
-      }
-      throw Error("Incorrect Password");
-    }
-    throw Error("Invalid HealthID");
-  };
+    throw Error("Incorrect Password");
+  }
+  throw Error("Invalid HealthID");
+};
 
 const Patient = mongoose.model("patient", patientSchema);
 

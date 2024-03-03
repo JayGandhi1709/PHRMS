@@ -6,7 +6,7 @@ const router = express.Router();
 
 // post - /bookAppointment
 router.post('/bookAppointment', requirePatientAuth,appointmentController.bookAppointment);
-router.patch('/updateAppointmentStatus/:status',requireDoctorAuth,appointmentController.updateAppointmentStatus);
+router.patch('/updateAppointmentStatus/:status',appointmentController.updateAppointmentStatus);
 router.get('/getAppointmentsPatients', requirePatientAuth,appointmentController.getAppointmentsPatients);
 router.get('/getAppointmentsDoctors', requireDoctorAuth,appointmentController.getAppointmentsDoctors);
 

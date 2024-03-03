@@ -114,9 +114,9 @@ module.exports.patient_register = async (req, res) => {
       setPassword,
     });
     console.log(BasicInformation.email, healthID);
-    sendMail(BasicInformation, healthID, "Welcome To Digital Health!"),
-      console.log("PATIENT", patient);
-    const token = createToken(patient._id);
+    sendMail(BasicInformation, healthID, "Welcome To Digital Health!");
+
+    const token = createToken(patient._id,"patient");
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ patient });
   } catch (err) {
@@ -131,7 +131,7 @@ module.exports.patient_login = async (req, res) => {
   const { healthID, password } = req.body;
   try {
     const patient = await Patient.login(healthID, password);
-    const token = createToken(patient._id);
+    const token = createToken(patient._id,"patient");
     // console.log("Token : " , token);
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
 

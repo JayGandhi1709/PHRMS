@@ -234,7 +234,7 @@ module.exports.doctor_register = async (req, res) => {
       sendMail(BasicInformation, "Welcome To Digital Health!");
       // console.log("DOCTOR", doctor);
 
-      const token = createToken(doctor._id);
+      const token = createToken(doctor._id,"doctor");
       res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
       // res.json({ message: "doctor"});
       res.status(200).json({ doctor });
@@ -252,7 +252,7 @@ module.exports.doctor_login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const doctor = await Doctor.login(email, password);
-    const token = createToken(doctor._id);
+    const token = createToken(doctor._id,"doctor");
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ doctor });
   } catch (err) {

@@ -110,6 +110,10 @@ const doctorSchema = new mongoose.Schema({
       required: [true, "Please enter hospital Contact Number"],
       minlength: [10, "Please Enter a valid Mobile Phone"],
     },
+    consultantFee: {
+      type: Number,
+      required: [true, "Please enter hospital Contact Number"],
+    },
     address: {
       address1: {
         type: String,

@@ -25,7 +25,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "https://phrms.vercel.app",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "DELETE", "PATCH","PUT"],
     credentials: true,
   })

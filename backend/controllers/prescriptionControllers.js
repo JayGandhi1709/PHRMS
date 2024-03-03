@@ -127,7 +127,11 @@ module.exports.add_prescription = async (req, res) => {
       investigations,
       advices,
     });
-    sendMail(prescription, patient, `Your Prescription by Dr. ${prescription.doctor} at ${prescription.hospital.name}`);
+    sendMail(
+      prescription,
+      patient,
+      `Your Prescription by Dr. ${prescription.doctor} at ${prescription.hospital.name}`
+    );
     res.status(200).json({ prescription });
   } catch (err) {
     console.log("ERROR", err);
@@ -136,13 +140,9 @@ module.exports.add_prescription = async (req, res) => {
 };
 
 module.exports.view_prescription = async (req, res) => {
-  const healthID = req.params.healthID;
   const id = req.params.id;
   try {
-    // const patient = await Patient.findOne({ healthID });
-    // const prescription = patient.prescriptions.filter((pres) => pres._id == id);
     const prescription = await Prescription.findOne({ _id: id });
-    // console.log(prescription)
     res.status(200).json({ prescription });
   } catch (err) {
     res.status(404).json({ error: "Something Went Wrong" });
