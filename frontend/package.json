@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://phrms.vercel.app/",
+  "proxy": "https://phrms-api.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
