@@ -56,7 +56,7 @@ const Login = (props) => {
   const handlePatientLogin = async (healthID, password) => {
     setLoading(true);
 
-    const res = await fetch("/login/patient", {
+    const res = await fetch(`{process.env.REACT_APP_BACKEND_URL}/login/patient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
