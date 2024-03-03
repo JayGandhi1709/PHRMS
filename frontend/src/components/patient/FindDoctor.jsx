@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import BookingPopup from "./bookingPopup";
+import { BACKENDURL } from "../../App";
 
 const FindDoctor = (props) => {
   const { admin } = props;
@@ -15,7 +16,7 @@ const FindDoctor = (props) => {
 
   useEffect(() => {
     async function fetchPatientList() {
-      const res = await fetch("/findDoctors", {
+      const res = await fetch(`${BACKENDURL}/findDoctors`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -43,6 +44,7 @@ const FindDoctor = (props) => {
     { field: "phoneNumber", headerName: "Contact No.", width: 150 },
     { field: "specialization", headerName: "Specialization", width: 120 },
     { field: "education", headerName: "Education", width: 100 },
+    { field: "consultationFee", headerName: "Fee", width: 100 },
     // { field: "city", headerName: "City", width: 100 },
     // { field: "state", headerName: "State", width: 90 },
     { field: "address", headerName: "Address", width: 190 },
@@ -60,7 +62,7 @@ const FindDoctor = (props) => {
           }}>
             <div className="flex justify-center bg-primary py-1 px-3 rounded font-semibold shadow-sm hover:bg-bgsecondary text-black">
               {/* <RiEyeFill className="h-4 my-auto" /> */}
-              <button className="font-bold ml-2">Book Appointment </button>
+              <button className="font-bold">Book Appointment </button>
             </div>
           </div>
         );
@@ -80,11 +82,12 @@ const FindDoctor = (props) => {
     phoneNumber: `+91 ${row.BasicInformation.phoneNumber}`,
     specialization: row.EducationInformation.specialization[0].specialization,
     education:
-      row.EducationInformation.education[
-        row.EducationInformation.education.length - 1
-      ].eduName,
+    row.EducationInformation.education[
+      row.EducationInformation.education.length - 1
+    ].eduName,
     // city: row.AddressInformation.city,
     // state: `${row.AddressInformation.state} - ${row.AddressInformation.pinCode}`,
+    consultationFee: row.HospitalInformation.consultationFee,
     address: `${row.AddressInformation.address1}, ${row.AddressInformation.address2} ${row.AddressInformation.city}, ${row.AddressInformation.state} - ${row.AddressInformation.pinCode}`,
     // pinCode: row.AddressInformation.pinCode,
   }));

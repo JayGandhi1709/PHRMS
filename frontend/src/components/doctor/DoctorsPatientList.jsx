@@ -7,6 +7,7 @@ import PrescriptionsList from "./PrescriptionsList";
 import { IconButton, Tooltip } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgNotes } from "react-icons/cg";
+import { BACKENDURL } from "../../App";
 
 const DoctorsPatientList = (props) => {
   const { setMenuItem } = props;
@@ -26,7 +27,7 @@ const DoctorsPatientList = (props) => {
   // }, [patientList]);
 
   async function fetchPatientList() {
-    const res = await fetch(`/getpatientlist/${props.loginData.BasicInformation.email}`, {
+    const res = await fetch(`${BACKENDURL}/getpatientlist/${props.loginData.BasicInformation.email}`, {
       credentials: "include",
     });
     const data = await res.json();

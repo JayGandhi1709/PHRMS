@@ -9,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
+import { BACKENDURL } from "../../App";
 // import { styled } from "@mui/styles";
 
 const CssTextField = styled(TextField)({
@@ -96,7 +97,7 @@ const DeletePopup = (props) => {
     // console.log("Comming");
     const url = userType === "Patient" ? `deletepatient` : `deletedoctor`;
 
-    const res = await fetch(`/${url}/${selectedID}`, {
+    const res = await fetch(`${BACKENDURL}/${url}/${selectedID}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

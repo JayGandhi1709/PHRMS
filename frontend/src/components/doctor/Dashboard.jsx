@@ -28,7 +28,7 @@ const Dashboard = (props) => {
     async function getpatient() {
       setLoading(true);
       if (healthID.length === 12) {
-        const res = await fetch(`/searchpatient/${healthID}`);
+        const res = await fetch(`${BACKENDURL}/searchpatient/${healthID}`);
         const data = await res.json();
 
         if (data.AuthError) {
@@ -79,10 +79,10 @@ const Dashboard = (props) => {
     if (healthID.length === 12) {
       setLoading(true);
       const notificationRes = await fetch(
-        `/createSearchNotification/${healthID}`,
+        `${BACKENDURL}/createSearchNotification/${healthID}`,
         { method: "POST" }
       );
-      const res = await fetch(`/searchpatient/${healthID}`);
+      const res = await fetch(`${BACKENDURL}/searchpatient/${healthID}`);
       const data = await res.json();
 
       if (data.AuthError) {

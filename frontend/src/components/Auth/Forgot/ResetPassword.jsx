@@ -17,6 +17,7 @@ import DoctorImg from "../../../Assets/images/home/doctor.svg";
 import PatientImg from "../../../Assets/images/home/patient.svg";
 import LoginImg_light from "../../../Assets/images/Login/LoginImg_light.svg";
 import LoginImg_dark from "../../../Assets/images/Login/LoginImg_dark.svg";
+import { BACKENDURL } from "../../../App";
 
 const CssTextField = styled(TextField)({
   "& label": {
@@ -56,7 +57,7 @@ const ResetPassword = (props) => {
 
   const validUser = async () => {
     // setLoading(true);
-    const res = await fetch(`/resetPassword/${userType}/${id}/${token}`, {
+    const res = await fetch(`${BACKENDURL}/resetPassword/${userType}/${id}/${token}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +86,7 @@ const ResetPassword = (props) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setConfirmPasswordError("");
-      const res = await fetch(`/resetPassword/${userType}/${id}/${token}`, {
+      const res = await fetch(`${BACKENDURL}/resetPassword/${userType}/${id}/${token}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

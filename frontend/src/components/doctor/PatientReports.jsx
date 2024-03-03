@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { RiEyeFill } from "react-icons/ri";
 import LinearProgress from "@mui/material/LinearProgress";
+import { BACKENDURL } from "../../App";
 
 const PatientHistory = (props) => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const PatientHistory = (props) => {
   useEffect(() => {
     async function getpatient() {
       if (props.healthID.length === 12) {
-        const res = await fetch(`/searchpatient/${props.healthID}`);
+        const res = await fetch(`${BACKENDURL}/searchpatient/${props.healthID}`);
         const data = await res.json();
 
         if (data.AuthError) {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import LinearProgress from "@mui/material/LinearProgress";
+import { BACKENDURL } from "../../App";
 
 const convertDatetoString = (dateString) => {
   let date = new Date(dateString);
@@ -20,7 +21,7 @@ const PatientAppointment = (props) => {
   const [selectedID, setSelectedID] = useState();
 
   async function fetchAppointmentsList() {
-    const res = await fetch("/getAppointmentsPatients", {
+    const res = await fetch(`${BACKENDURL}/getAppointmentsPatients`, {
       credentials: "include",
     });
     const data = await res.json();
@@ -44,7 +45,7 @@ const PatientAppointment = (props) => {
   }, []);
 
   const updateAppointmentStatus = async (id, status) => {
-    const res = await fetch(`/updateAppointmentStatus/${status}`, {
+    const res = await fetch(`${BACKENDURL}/updateAppointmentStatus/cancelled`, {
       method: "PATCH",
       credentials: "include",
       body: JSON.stringify({ appointmentID: id }),

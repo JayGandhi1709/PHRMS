@@ -652,6 +652,25 @@ const HospitalInformation = (props) => {
           error={Boolean(errors?.HospitalInformation?.hospitalContact)}
           helperText={errors?.HospitalInformation?.hospitalContact?.message}
         />
+        <CssTextField
+          type="number"
+          id="charge"
+          label="Consultation Charge"
+          variant="outlined"
+          InputProps={{
+            style: { color: "var(--heading-color)" },
+          }}
+          name="charge"
+          InputLabelProps={{ shrink: true, required: true }}
+          placeholder="Enter Consultant Fee"
+          fullWidth
+          margin="normal"
+          {...register("HospitalInformation.consultantFee", {
+            required: "This field is required",
+          })}
+          error={Boolean(errors?.HospitalInformation?.consultantFee)}
+          helperText={errors?.HospitalInformation?.consultantFee?.message}
+        />
         <br />
         <br />
         <div className="flex sm:flex-row flex-col justify-between md:space-x-4 sm:space-x-2 space-x-0">
@@ -999,31 +1018,31 @@ const EmergencyContactDetails = (props) => {
             helperText={errors?.surName?.message}
           />
         </div>
-        <CssTextField
-          id="email"
-          label="E-mail"
-          name="email"
-          variant="outlined"
-          InputProps={{
-            style: { color: "var(--heading-color)" },
-          }}
-          InputLabelProps={{ shrink: true, required: true }}
-          placeholder="Enter E-mail Address"
-          fullWidth
-          margin="normal"
-          {...register("EmergencyContactDetails.email", {
-            required: "This field is required",
-            pattern: {
-              value:
-                /^[a-zA-Z0-9.!#$%&’*+/=?^`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: "Enter Valid Email Address.",
-            },
-          })}
-          error={Boolean(errors?.EmergencyContactDetails?.email)}
-          helperText={errors?.EmergencyContactDetails?.email?.message}
-        />
 
         <div className="flex sm:flex-row flex-col justify-between md:space-x-4 sm:space-x-2 space-x-0">
+          <CssTextField
+            id="email"
+            label="E-mail"
+            name="email"
+            variant="outlined"
+            InputProps={{
+              style: { color: "var(--heading-color)" },
+            }}
+            InputLabelProps={{ shrink: true, required: true }}
+            placeholder="Enter E-mail Address"
+            fullWidth
+            margin="normal"
+            {...register("EmergencyContactDetails.email", {
+              required: "This field is required",
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&’*+/=?^`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: "Enter Valid Email Address.",
+              },
+            })}
+            error={Boolean(errors?.EmergencyContactDetails?.email)}
+            helperText={errors?.EmergencyContactDetails?.email?.message}
+          />
           <CssTextField
             id="phone-number"
             label="Phone Number"
@@ -1048,35 +1067,6 @@ const EmergencyContactDetails = (props) => {
             error={Boolean(errors?.EmergencyContactDetails?.phoneNumber)}
             helperText={errors?.EmergencyContactDetails?.phoneNumber?.message}
           />
-
-          <CssTextField
-            id="alternate-phone"
-            label="Alternate Phone"
-            variant="outlined"
-            name="alternatePhoneNumber"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              style: { color: "var(--heading-color)" },
-              startAdornment: (
-                <InputAdornment position="start">
-                  <span className="text-heading">+91</span>
-                </InputAdornment>
-              ),
-            }}
-            placeholder="Enter Alternate Phone"
-            maxLength={13}
-            fullWidth
-            margin="normal"
-            {...register("EmergencyContactDetails.alternatePhoneNumber", {
-              pattern: { value: /^\d{10}$/, message: "Enter Valid Number" },
-            })}
-            error={Boolean(
-              errors?.EmergencyContactDetails?.alternatePhoneNumber
-            )}
-            helperText={
-              errors?.EmergencyContactDetails?.alternatePhoneNumber?.message
-            }
-          />
         </div>
 
         <CssTextField
@@ -1097,175 +1087,6 @@ const EmergencyContactDetails = (props) => {
           error={Boolean(errors?.EmergencyContactDetails?.relation)}
           helperText={errors?.EmergencyContactDetails?.relation?.message}
         />
-        <hr />
-
-        <div className="pt-4">
-          <div className="flex sm:flex-row flex-col justify-between md:space-x-4 sm:space-x-2 space-x-0">
-            <CssTextField
-              id="address1"
-              label="Address 1"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="address1"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter House/Flat No."
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.address1", {
-                required: "This field is required",
-              })}
-              error={Boolean(
-                errors?.EmergencyContactDetails?.address?.address1
-              )}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.address1?.message
-              }
-            />
-
-            <CssTextField
-              id="address2"
-              label="Address 2"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="address2"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter Street Name"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.address2", {
-                required: "This field is required",
-              })}
-              error={Boolean(
-                errors?.EmergencyContactDetails?.address?.address2
-              )}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.address2?.message
-              }
-            />
-          </div>
-          <div className="flex sm:flex-row flex-col justify-between md:space-x-4 sm:space-x-2 space-x-0">
-            <CssTextField
-              id="city"
-              label="City"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="city"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter City Name"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.city", {
-                required: "This field is required",
-              })}
-              error={Boolean(errors?.EmergencyContactDetails?.address?.city)}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.city?.message
-              }
-            />
-
-            <CssTextField
-              id="taluka"
-              label="Taluka Name"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="taluka"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter Taluka Name"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.taluka", {
-                required: "This field is required",
-              })}
-              error={Boolean(errors?.EmergencyContactDetails?.address?.taluka)}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.taluka?.message
-              }
-            />
-
-            <CssTextField
-              id="district"
-              label="District"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="district"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter District Name"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.district", {
-                required: "This field is required",
-              })}
-              error={Boolean(
-                errors?.EmergencyContactDetails?.address?.district
-              )}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.district?.message
-              }
-            />
-          </div>
-          <div className="flex sm:flex-row flex-col justify-between md:space-x-4 sm:space-x-2 space-x-0">
-            <CssTextField
-              id="state"
-              label="State"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="state"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter State Name"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.state", {
-                required: "This field is required",
-              })}
-              error={Boolean(errors?.EmergencyContactDetails?.address?.state)}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.state?.message
-              }
-            />
-
-            <CssTextField
-              type={"number"}
-              id="pinCode"
-              label="Pin Code"
-              variant="outlined"
-              InputProps={{
-                style: { color: "var(--heading-color)" },
-              }}
-              name="pinCode"
-              InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter Pin/Postal Code"
-              fullWidth
-              margin="normal"
-              {...register("EmergencyContactDetails.address.pinCode", {
-                required: "This field is required",
-                minLength: {
-                  value: 6,
-                  message: "Pin-code length must be 6",
-                },
-                maxLength: {
-                  value: 6,
-                  message: "Pin-code length must be 6",
-                },
-              })}
-              error={Boolean(errors?.EmergencyContactDetails?.address?.pinCode)}
-              helperText={
-                errors?.EmergencyContactDetails?.address?.pinCode?.message
-              }
-            />
-          </div>
-        </div>
       </div>
     </>
   );
@@ -1443,6 +1264,7 @@ const Register = (props) => {
       HospitalInformation: {
         hospitalName: "",
         hospitalContact: "",
+        consultantFee: "",
         address: {
           address1: "",
           address2: "",
@@ -1461,14 +1283,6 @@ const Register = (props) => {
         mobile: "",
         email: "",
         relation: "",
-        address: {
-          building: "",
-          city: "",
-          taluka: "",
-          district: "",
-          state: "",
-          pincode: "",
-        },
       },
       setPassword: {
         password: "",
@@ -1624,7 +1438,7 @@ const Register = (props) => {
             message: "Your Registration done Successfully!",
           });
           props.setToastShow(true);
-          // navigate("/");
+          navigate("/");
         }
       } else {
         // setPasswordError("Password Doesn't Matches");

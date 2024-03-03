@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Slide from "@mui/material/Slide";
 import { RiCheckFill, RiCloseFill, RiArrowDropLeftLine } from "react-icons/ri";
 import ViewDetails from "./ViewDetails";
+import { BACKENDURL } from "../../App";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,7 +27,7 @@ export default function Popup(props) {
   };
 
   const onReject = async (id, e) => {
-    const res = await fetch(`/rejected/${id}`, {
+    const res = await fetch(`${BACKENDURL}/rejected/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export default function Popup(props) {
     }
   };
   const onApprove = async (id, e) => {
-    const res = await fetch(`/approval/${id}`, {
+    const res = await fetch(`${BACKENDURL}/approval/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

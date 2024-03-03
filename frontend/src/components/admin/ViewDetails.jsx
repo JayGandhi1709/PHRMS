@@ -28,6 +28,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import { useEffect } from "react";
 import PreviewDocument from "./PreviewDocument";
+import { BACKENDURL } from "../../App";
 
 // Stepper Labels get
 
@@ -1006,7 +1007,7 @@ const ViewDetails = (props) => {
 
   useEffect(() => {
     async function fetchDoctor() {
-      const res = await fetch(`/searchdoctor/${props.selectedID}`);
+      const res = await fetch(`${BACKENDURL}/searchdoctor/${props.selectedID}`);
       const data = await res.json();
 
       if (data.AuthError) {
@@ -1022,7 +1023,7 @@ const ViewDetails = (props) => {
     }
     async function fetchPatient() {
       // console.log(props.selectedID)
-      const res = await fetch(`/getPatientDetails/${props.selectedID}`);
+      const res = await fetch(`${BACKENDURL}/getPatientDetails/${props.selectedID}`);
       const data = await res.json();
 
       if (data.AuthError) {

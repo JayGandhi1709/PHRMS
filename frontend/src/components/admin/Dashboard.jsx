@@ -14,6 +14,7 @@ import {
 import {TbReportMedical} from "react-icons/tb";
 import { FaUserMd, FaRegUser } from "react-icons/fa";
 import { FcApproval } from "react-icons/fc";
+import { BACKENDURL } from "./../../App";
 
 const Dashboard = (props) => {
   const { loginData, setMenuItem } = props;
@@ -38,7 +39,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     async function getGenderRatio() {
-      const res = await fetch(`/getGenderRatio`);
+      const res = await fetch(`${BACKENDURL}/getGenderRatio`);
       const data = await res.json();
 
       if (data.AuthError) {

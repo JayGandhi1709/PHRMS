@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -9,11 +10,13 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-// import { DigitalClock } from '@mui/x-date-pickers/DigitalClock';
-// import { styled } from "@mui/styles";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { BACKENDURL } from "../../App";
 
-const CssTextField = styled(TextField)({
+
+const CssTextField = styled(TextField,TimePicker)({
   "& label": {
     color: "var(--heading-color)",
   },
@@ -32,6 +35,8 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -91,8 +96,8 @@ const BookingPopup = (props) => {
 
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  let charge = "500";
+  const [selectedTime, setSelectedTime] = useState();
+  let charge = doctor.consultationFee;
 
   const handleClickOpen = () => {
     setBookingPopup(true);
@@ -112,7 +117,7 @@ const BookingPopup = (props) => {
       setErrors({ date: false, time: true });
     } else {
       console.log(selectedDate, selectedTime, charge, doctor);
-      const res = await fetch(`/bookAppointment`, {
+      const res = await fetch(`${BACKENDURL}/bookAppointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -181,12 +186,13 @@ const BookingPopup = (props) => {
               margin="normal"
               inputProps={{
                 min: today,
-                max: today + 1,
+                max: today,
               }}
               error={Boolean(errors?.date)}
               helperText={errors?.date ? `Please Enter Proper Date` : ""}
             />
-            <CssTextField
+            
+            {/* <CssTextField
               type="time"
               id="time"
               name="time"
@@ -199,31 +205,46 @@ const BookingPopup = (props) => {
                 setSelectedTime(e.target.value);
               }}
               InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter Your Date Of Birth"
+              placeholder="Enter TIme"
               fullWidth
               margin="normal"
               inputProps={{
-                step: 3000, // 5 minutes intervals
+                step: 3600, // 5 minutes intervals
               }}
               error={Boolean(errors?.time)}
               helperText={errors?.time ? `Please Enter Proper Time` : ""}
-            />
+            /> */}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimePicker
+                fullWidth
+                id="time"
+                name="time"
+                label="Time"
+                views={["hours"]}
+                InputProps={{
+                  style: { color: "var(--heading-color)" },
+                }}
+                value={selectedTime}
+                minutesStep={30}
+                onChange={(newValue) => setSelectedTime(newValue)}
+                InputLabelProps={{ shrink: true, required: true }}
+                margin="normal"
+                error={Boolean(errors?.time)}
+                helperText={errors?.time ? `Please Enter Proper Time` : ""}
+              />
+            </LocalizationProvider>
             {/* <DigitalClock label="Basic time picker" /> */}
             <CssTextField
               type="text"
-              id="charges"
-              name="charges"
-              label="Consultant Charges"
+              id="consultantFee"
+              name="Consultant Fee"
+              label="Consultant Fee"
               variant="outlined"
               InputProps={{
                 style: { color: "var(--heading-color)" },
               }}
-              onBlur={(e) => {
-                charge = e.target.value;
-              }}
               InputLabelProps={{ shrink: true, required: true }}
-              placeholder="Enter Your Date Of Birth"
-              value="500"
+              value={charge}
               fullWidth
               margin="normal"
               inputProps={{

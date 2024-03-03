@@ -9,6 +9,7 @@ import DeletePopup from "./DeletePopup";
 import { IconButton, Tooltip } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { CgNotes } from "react-icons/cg";
+import { BACKENDURL } from "../../App";
 
 const PatientList = (props) => {
   const { admin } = props;
@@ -28,7 +29,7 @@ const PatientList = (props) => {
   // }, [patientList]);
 
   async function fetchPatientList() {
-    const res = await fetch("/getPatientList", {
+    const res = await fetch(`${BACKENDURL}/getPatientList`, {
       credentials: "include",
     });
     const data = await res.json();

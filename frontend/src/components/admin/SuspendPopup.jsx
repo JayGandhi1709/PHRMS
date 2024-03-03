@@ -9,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
+import { BACKENDURL } from "../../App";
 // import { styled } from "@mui/styles";
 
 const CssTextField = styled(TextField)({
@@ -98,7 +99,7 @@ const SuspandPopup = (props) => {
 
     const url = action === "suspend" ? `suspenddoctor` : `unsuspenddoctor`;
     
-    const res = await fetch(`/${url}/${selectedID}`, {
+    const res = await fetch(`${BACKENDURL}/${url}/${selectedID}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

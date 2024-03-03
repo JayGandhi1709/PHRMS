@@ -17,6 +17,7 @@ import DoctorImg from "../../../Assets/images/home/doctor.svg";
 import PatientImg from "../../../Assets/images/home/patient.svg";
 import LoginImg_light from "../../../Assets/images/Login/LoginImg_light.svg";
 import LoginImg_dark from "../../../Assets/images/Login/LoginImg_dark.svg";
+import { BACKENDURL } from "../../../App";
 
 const CssTextField = styled(TextField)({
   "& label": {
@@ -55,8 +56,8 @@ const Login = (props) => {
   // Patient Login Function
   const handlePatientLogin = async (healthID, password) => {
     setLoading(true);
-    console.log(`{process.env.REACT_APP_BACKEND_URL}/login/patient`);
-    const res = await fetch(`{process.env.REACT_APP_BACKEND_URL}/login/patient`, {
+
+    const res = await fetch(`${BACKENDURL}/login/patient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -145,12 +146,12 @@ const Login = (props) => {
 
       case "Doctor":
         // console.log(username + password);
-        handleDoctorAdminLogin(username, password, `/login/doctor`);
+        handleDoctorAdminLogin(username, password, `${BACKENDURL}/login/doctor`);
         break;
 
       case "Admin":
         // console.log(username + password);
-        handleDoctorAdminLogin(username, password, `/login/admin`);
+        handleDoctorAdminLogin(username, password, `${BACKENDURL}/login/admin`);
         break;
       default:
         break;

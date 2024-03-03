@@ -12,6 +12,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { RiEyeFill } from "react-icons/ri";
+import { BACKENDURL } from "../../App";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -124,7 +125,7 @@ const PrescriptionsList = (props) => {
 
   useEffect(() => {
     async function getpatient() {
-      const res = await fetch(`/getPatientDetails/${selectedID}`);
+      const res = await fetch(`${BACKENDURL}/getPatientDetails/${selectedID}`);
       const data = await res.json();
 
       if (data.AuthError) {

@@ -6,6 +6,7 @@ import { RiCheckFill, RiCloseFill } from "react-icons/ri";
 import LinearProgress from "@mui/material/LinearProgress";
 
 import Popup from "./Popup";
+import { BACKENDURL } from "../../App";
 
 const Request = (props) => {
   const { admin } = props;
@@ -17,7 +18,7 @@ const Request = (props) => {
   const [loading, setLoading] = useState(true);
 
   async function fetchUnverifiedDoctorList() {
-    const res = await fetch("/getUnverifiedDoctorList", {
+    const res = await fetch(`${BACKENDURL}/getUnverifiedDoctorList`, {
       credentials: "include",
     });
     const data = await res.json();
@@ -48,7 +49,7 @@ const Request = (props) => {
     // e.preventDefault();
 
     // console.log(id);
-    const res = await fetch(`/rejected/${id}`, {
+    const res = await fetch(`${BACKENDURL}/rejected/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +77,7 @@ const Request = (props) => {
     }
   };
   const onApprove = async (id, e) => {
-    const res = await fetch(`/approval/${id}`, {
+    const res = await fetch(`${BACKENDURL}/approval/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

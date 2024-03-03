@@ -9,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
+import { BACKENDURL } from "../../App";
 // import { styled } from "@mui/styles";
 
 const CssTextField = styled(TextField)({
@@ -100,7 +101,7 @@ const NotificationPopup = (props) => {
 
   const markAsRead = async () => {
     // console.log("Mark as read");
-    const res = await fetch(`/markUserNotificationAsRead`, {
+    const res = await fetch(`${BACKENDURL}/markUserNotificationAsRead`, {
       method: "PATCH",
     });
     const data = await res.json();

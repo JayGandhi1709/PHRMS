@@ -14,6 +14,7 @@ import { styled } from "@mui/styles";
 // Images
 import LoginImg_light from "../../../Assets/images/Login/LoginImg_light.svg";
 import LoginImg_dark from "../../../Assets/images/Login/LoginImg_dark.svg";
+import { BACKENDURL } from "../../../App";
 
 const CssTextField = styled(TextField)({
   "& label": {
@@ -53,7 +54,7 @@ const AdminLogin = (props) => {
     setLoading(true);
     e.preventDefault();
     // console.log(email, password);
-    const res = await fetch(`/login/admin`, {
+    const res = await fetch(`${BACKENDURL}/login/admin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

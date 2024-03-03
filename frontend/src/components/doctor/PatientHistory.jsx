@@ -5,6 +5,7 @@ import { RiEyeFill } from "react-icons/ri";
 import { AiOutlineSearch } from "react-icons/ai";
 import LinearProgress from "@mui/material/LinearProgress";
 import { IconButton, Tooltip } from "@mui/material";
+import { BACKENDURL } from "../../App";
 
 const PatientHistory = (props) => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const PatientHistory = (props) => {
 
   useEffect(() => {
     async function getpatient() {
-      const res = await fetch(`/getpatienthistory`);
+      const res = await fetch(`${BACKENDURL}/getpatienthistory`);
       const data = await res.json();
 
       if (data.AuthError) {

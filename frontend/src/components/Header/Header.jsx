@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { RiMoonLine, RiSunLine, RiMenuLine } from "react-icons/ri";
 // CSS
 import "./Header.css";
+import { BACKENDURL } from "../../App";
 
 const nav__links = [
   {
@@ -53,7 +54,7 @@ const Header = (props) => {
 
   const logout = async () => {
     // console.log(logout)
-    const res = await fetch("/logout");
+    const res = await fetch(`${BACKENDURL}/logout`);
     props.settoastCondition({
       status: "success",
       message: "Logged out Successfully!!!",

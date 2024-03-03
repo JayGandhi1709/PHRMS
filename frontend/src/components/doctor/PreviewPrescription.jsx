@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import doctor_profile from "../../assets/img/dashboard/doctor2.png";
 import { useEffect, useState } from "react";
 import { Typography, Breadcrumbs } from "@mui/material";
+import { BACKENDURL } from "../../App";
 
 const PreviewPrescription = (props) => {
   // printprescriptionstart
@@ -73,7 +74,7 @@ const PreviewPrescription = (props) => {
       // );
       const res = await fetch(
         // `/viewprescription/${props.healthID}/${props.prescriptionID}`
-        `/viewprescription/${props.prescriptionID}`
+        `${BACKENDURL}/viewprescription/${props.prescriptionID}`
       );
       const data = await res.json();
       // console.log(data);
@@ -98,7 +99,7 @@ const PreviewPrescription = (props) => {
       }
     }
     async function fetchpatient(hID) {
-      const res = await fetch(`/searchpatient/${hID}`);
+      const res = await fetch(`${BACKENDURL}/searchpatient/${hID}`);
       const data = await res.json();
 
       if (data.AuthError) {

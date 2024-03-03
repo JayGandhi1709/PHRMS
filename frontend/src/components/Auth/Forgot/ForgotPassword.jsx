@@ -17,6 +17,7 @@ import DoctorImg from "../../../Assets/images/home/doctor.svg";
 import PatientImg from "../../../Assets/images/home/patient.svg";
 import LoginImg_light from "../../../Assets/images/Login/LoginImg_light.svg";
 import LoginImg_dark from "../../../Assets/images/Login/LoginImg_dark.svg";
+import { BACKENDURL } from "../../../App";
 
 const CssTextField = styled(TextField)({
   "& label": {
@@ -55,8 +56,8 @@ const ForgotPassword = (props) => {
     // console.log(email, password);
     const path =
       radio === "Patient"
-        ? "/forgotPassword/patient"
-        : "/forgotPassword/doctor";
+        ? `${BACKENDURL}/forgotPassword/patient`
+        : `${BACKENDURL}/forgotPassword/doctor`;
     const res = await fetch(path, {
       method: "POST",
       headers: {

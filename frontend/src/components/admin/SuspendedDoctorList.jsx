@@ -9,6 +9,7 @@ import DeletePopup from "./DeletePopup";
 import SuspandPopup from "./SuspendPopup";
 import { IconButton, Tooltip } from "@mui/material";
 import { MdDelete,MdBlock } from "react-icons/md";
+import { BACKENDURL } from "../../App";
 
 const SuspendedDoctorList = (props) => {
   const { admin } = props;
@@ -23,7 +24,7 @@ const SuspendedDoctorList = (props) => {
   const [field, setField] = useState();
 
   async function fetchSuspendedDoctorList() {
-    const res = await fetch("/getSuspendedDoctorList", {
+    const res = await fetch(`${BACKENDURL}/getSuspendedDoctorList`, {
       credentials: "include",
     });
     const data = await res.json();

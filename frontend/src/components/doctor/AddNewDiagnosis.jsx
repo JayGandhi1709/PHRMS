@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { TextField, Typography, Breadcrumbs } from "@mui/material";
 import { styled } from "@mui/styles";
+import { BACKENDURL } from "../../App";
 
 const CssTextField = styled(TextField)({
   "& label": {
@@ -107,7 +108,7 @@ const AddNewDiagnosis = (props) => {
   const handleAddPrescription = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await fetch(`/prescription/${props.healthID}`, {
+    const res = await fetch(`${BACKENDURL}/prescription/${props.healthID}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

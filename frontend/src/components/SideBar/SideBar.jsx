@@ -63,6 +63,7 @@ import DoctorsPatientList from "../doctor/DoctorsPatientList";
 import NotificationPopup from "../patient/notificationPopup";
 import PatientAppointment from "../patient/patientAppointment";
 import DoctorAppointment from "../doctor/doctorAppointment";
+import { BACKENDURL } from "../../App";
 
 const drawerWidth = 240;
 
@@ -147,7 +148,7 @@ export default function SideBar(props) {
   const logout = async () => {
     // console.log(logout);
     props.setHealthID("");
-    const res = await fetch("/logout");
+    const res = await fetch(`${BACKENDURL}/logout`);
     props.settoastCondition({
       status: "success",
       message: "Logged out Successfully!!!",
@@ -240,7 +241,7 @@ export default function SideBar(props) {
 
   async function getNotification() {
     if (location.pathname == "/patient") {
-      const res = await fetch(`/getUserNotifications`);
+      const res = await fetch(`/${BACKENDURL}getUserNotifications`);
       const data = await res.json();
       // console.log(data);
       if (data.AuthError) {
