@@ -66,7 +66,7 @@ function Patient(props) {
   
   useEffect(() => {
     async function getpatient() {
-      const res = await fetch(`/getpatient`);
+      const res = await fetch(`${BACKENDURL}/getpatient`);
       const data = await res.json();
       // console.log(data);
       if (data.AuthError || data.patient === null) {
