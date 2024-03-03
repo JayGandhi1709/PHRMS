@@ -1,0 +1,101 @@
+<div className="flex flex-row justify-between flex-wrap m-5">
+              <div className="text-heading flex flex-col w-[45%]">
+                <h3 className="text-2xl font-extrabold">Patient Details</h3>
+                {/* <div className="bg-primary">Data</div> */}
+                <div
+                  style={{ background: "var(--card-bg)" }}
+                  className="p-4 mt-4 px-8 rounded-xl shadow-md shadow-primary border-2 border-primary text-xl"
+                >
+                  <div>
+                    <h3>
+                      Name : {loginData.BasicInformation.name.firstName}{" "}
+                      {loginData.BasicInformation.name.middleName}{" "}
+                      {loginData.BasicInformation.name.lastName}
+                    </h3>
+                  </div>
+                  <div>
+                    <h3>
+                      Date :{" "}
+                      {convertDatetoString(loginData.BasicInformation.dob)}
+                    </h3>
+                  </div>
+                  <div>
+                    <h3>
+                      Blood group : {loginData.HealthInformation.bloodGroup}
+                    </h3>
+                  </div>
+
+                  <div className="w-[100%]">
+                    <h3 className="font-bold mt-4">Past Health History</h3>
+                    <div>{`${
+                      loginData.HealthInformation.diseases[0].diseaseName ||
+                      "No"
+                    } (${
+                      loginData.HealthInformation.diseases[0]?.diseaseyrs || "0"
+                    } yrs.)`}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-heading flex flex-col w-[45%]">
+                <h3 className="font-extrabold text-2xl ">
+                  Recent Health Checkup
+                </h3>
+                {/* <div className="bg-primary">Data</div> */}
+                {prescriptions.length > 0 ? (
+                  <div
+                    style={{ background: "var(--card-bg)" }}
+                    className="mt-4 p-4 rounded-xl shadow-md shadow-primary border-2 border-primary px-8 text-xl"
+                  >
+                    <div className="flex ">
+                      <div>
+                        <h3>Consultant Doctor :</h3>
+                      </div>
+                      <div className="ml-2">
+                        <h3>{`Dr. ${prescriptions[0].doctor}`}</h3>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <h3>Date :</h3>
+                      </div>
+                      <div className="ml-2">
+                        <h3>
+                          {convertDatetoString(prescriptions[0].createdAt)}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <div>
+                        <h3>Diagnosis : </h3>
+                      </div>
+                      <div className="ml-2">
+                        <h3>{prescriptions[0].diagnosis}</h3>
+                      </div>
+                    </div>
+                    <div
+                        onClick={() => {
+                          console.log(prescriptions[0]._id)
+                          setPrescriptionID(prescriptions[0]._id);
+                          setMenuItem("PreviewPrescription");
+                        }}
+                      >
+                        <div className=" mt-2 flex items-center justify-evenly text-base bg-primary py-1 px-2 rounded font-semibold  shadow-sm hover:bg-bgsecondary w-5/12  ">
+                          <img src={reports} className="h-4" alt="report"></img>
+
+                          <button className=" font-semibold pl-1">
+                            Preview Prescription
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                ) : (
+                  <div
+                    style={{ background: "var(--card-bg)" }}
+                    className="mt-4 p-4 rounded-xl shadow-md shadow-primary border-2 border-primary px-8 flex justify-center font-bold"
+                  >
+                    {" "}
+                    No Data Found...{" "}
+                  </div>
+                )}
+              </div>
+            </div>
