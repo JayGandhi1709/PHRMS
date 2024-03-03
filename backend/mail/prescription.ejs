@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <style>
+      hr {
+        height: 2px;
+        border-width: 0;
+        color: black;
+        background-color: black;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .th {
+        font-weight: bold;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      .bottom {
+        border-bottom: 2px solid #ddd;
+      }
+      .width-50 {
+        width: 50%;
+      }
+      .right {
+        text-align: right;
+      }
+      .left {
+        text-align: right;
+      }
+      .center {
+        text-align: center;
+      }
+    </style>
+    <title>prescription</title>
+  </head>
+  <body>
+    <div style="margin: 30px">
+      <div>
+        <table>
+          <tr>
+            <td class="width-50">
+              <div><b>Dr. <%= prescription.doctor %></b></div>
+              <div><b>Mobile : </b>+91 <%= prescription.doctormobile %></div>
+            </td>
+            <td class="width-50 right">
+              <div>
+                <b>Hospital Name : </b><%= prescription.hospital.name %>
+              </div>
+              <div><b>Address : </b><%= prescription.hospital.address %></div>
+              <div><b>Mobile : </b>+91 <%= prescription.hospital.mobile %></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <hr />
+
+      <div>
+        <table>
+          <tr>
+            <td style="width: 20%; font-weight: bold"><b>healthID : </b></td>
+            <td class="width-50"><%= prescription.healthID %></td>
+            <td style="width: 30%" class="right"><b>Date : </b><%= date %></td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold">Patient Name :</td>
+            <td>
+              <%= patient.BasicInformation.name.firstName %> <%=
+              patient.BasicInformation.name.middleName %> <%=
+              patient.BasicInformation.name.lastName %>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 20%; font-weight: bold">Address :</td>
+            <td>
+              <%= patient.AddressInformation.address1 %>, <%=
+              patient.AddressInformation.address2 %>, <%=
+              patient.AddressInformation.city %>, <%=
+              patient.AddressInformation.taluka %>, <%=
+              patient.AddressInformation.district %>, <%=
+              patient.AddressInformation.state %>, <%=
+              patient.AddressInformation.pinCode %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <hr style="height:2px;border-width:0;color:black;background-color:black" /> -->
+
+      <div style="margin-top: 20px">
+        <table>
+          <tr class="th">
+            <td class="width-50 center">Chief complaints</td>
+            <td class="width-50 center">Clinincal findings</td>
+          </tr>
+          <% prescription.chiefComplaints.forEach(complaint => { %>
+          <tr class="bottom">
+            <td class="width-50 center">
+              <%= complaint.complaint %> (<%= complaint.duration %>)
+            </td>
+            <td class="width-50 center"><%= complaint.finding %></td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+
+      <div>
+        <div style="margin: 10px 0px 10px 0px">
+          <div><b>Note :</b></div>
+          <div><%= prescription.notes %></div>
+        </div>
+        <div style="margin: 10px 0px 10px 0px">
+          <div><b>Diagnosis :</b></div>
+          <div><%= prescription.diagnosis %></div>
+        </div>
+        <div style="margin: 10px 0px 10px 0px">
+          <div><b>Procedure Conducted :</b></div>
+          <div><%= prescription.procedureConducted %></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px">
+        <table>
+          <tr class="th">
+            <td>Sr.</td>
+            <td class="center">Medicine name</td>
+            <td class="center">Dosages</td>
+            <td class="center">Duration</td>
+          </tr>
+          <% prescription.medicines.forEach((medicine,index) => { %>
+          <tr class="bottom">
+            <td class="center"><%= ++index %></td>
+            <td class="center"><%= medicine.medicineName %></td>
+            <td class="center" style="padding: 10px">
+              Morning : <% if(medicine.dosage.morning.quantity > 0) { %>
+                <%=medicine.dosage.morning.quantity %> (<%=medicine.dosage.morning.remark %>)
+                <% }else{ %>
+                  <%=  0 %>
+                  <%  } %>
+                <br />
+              Aftermoon : <% if(medicine.dosage.afternoon.quantity > 0) { %>
+                <%=medicine.dosage.afternoon.quantity %> (<%=medicine.dosage.afternoon.remark %>)
+                <% }else{ %>
+                <%=  0 %>
+                <%  } %>
+                <br />
+              Evening : <% if(medicine.dosage.evening.quantity > 0) { %>
+                <%=medicine.dosage.evening.quantity %> (<%=medicine.dosage.evening.remark %>)
+                <% }else{ %>
+                <%=  0 %>
+                <%  } %>
+            </td>
+            <td class="center">
+              days : <%= medicine.duration %><br />
+              Total Tab : <%= medicine.total %>
+            </td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+
+      <div style="margin-top: 20px">
+        <div><b>Insvestigations</b></div>
+        <% prescription.investigations.forEach((investigation,index) => { %>
+        <div><%= index+1 %>) <%= investigation.investigation %></div>
+        <% }); %>
+      </div>
+
+      <div>
+        <div><b>Advices</b></div>
+        <% prescription.advices.forEach((advice,index) => { %>
+        <div><%= index+1 %>) <%= advice.advice %></div>
+        <% }); %>
+      </div>
+    </div>
+  </body>
+</html>
