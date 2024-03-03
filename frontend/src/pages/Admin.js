@@ -20,7 +20,7 @@ const Admin = (props) => {
 
   useEffect(() => {
     async function fetchAdmin() {
-      const res = await fetch("/getadmin");
+      const res = await fetch("https://phrms.vercel.app/getadmin");
       const data = await res.json();
       if (data.AuthError || data.admin === null) {
         props.settoastCondition({
