@@ -55,7 +55,7 @@ const Login = (props) => {
   // Patient Login Function
   const handlePatientLogin = async (healthID, password) => {
     setLoading(true);
-
+    console.log(`{process.env.REACT_APP_BACKEND_URL}/login/patient`);
     const res = await fetch(`{process.env.REACT_APP_BACKEND_URL}/login/patient`, {
       method: "POST",
       headers: {
