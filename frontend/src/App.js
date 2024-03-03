@@ -18,7 +18,7 @@ import ForgotPassword from "./components/Auth/Forgot/ForgotPassword";
 import ResetPassword from "./components/Auth/Forgot/ResetPassword";
 // Backend Link
 // export const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
-export const BACKENDURL = "https://phrms.vercel.app/";
+export const BACKENDURL = "https://phrms-api.vercel.app/";
 
 function App() {
   // React-Messages Toast
