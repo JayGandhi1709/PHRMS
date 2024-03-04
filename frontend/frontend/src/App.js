@@ -18,7 +18,6 @@ import ForgotPassword from "./components/Auth/Forgot/ForgotPassword";
 import ResetPassword from "./components/Auth/Forgot/ResetPassword";
 // Backend Link
 export const BACKENDURL = process.env.REACT_APP_BACKEND_URL;
-console.log("BACKENDURL", BACKENDURL);
 
 function App() {
   // React-Messages Toast
