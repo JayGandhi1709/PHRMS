@@ -37,7 +37,7 @@ module.exports.admin_login = async (req, res) => {
     // console.log(admin);
     const token = createToken(admin._id, "admin");
     // console.log(token);
-    res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000,path: '/', });
+    res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000,path: 'https://phrms.vercel.app', });
 
     res.status(200).json({ admin });
   } catch (err) {
