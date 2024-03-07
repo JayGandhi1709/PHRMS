@@ -1,7 +1,7 @@
 const Patient = require("../models/patient");
 const Prescription = require("../models/prescription");
 // const fileupload = require("express-fileupload");
-const { createToken,createForgotPasswordToken } = require("../utils/createToken");
+const { createToken, createForgotPasswordToken } = require("../utils/createToken");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const path = require("path");
@@ -116,7 +116,7 @@ module.exports.patient_register = async (req, res) => {
     console.log(BasicInformation.email, healthID);
     sendMail(BasicInformation, healthID, "Welcome To Digital Health!");
 
-    const token = createToken(patient._id,"patient");
+    const token = createToken(patient._id, "patient");
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ patient });
   } catch (err) {
@@ -131,11 +131,15 @@ module.exports.patient_login = async (req, res) => {
   const { healthID, password } = req.body;
   try {
     const patient = await Patient.login(healthID, password);
-    const token = createToken(patient._id,"patient");
+    const token = createToken(patient._id, "patient");
     // console.log("Token : " , token);
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.cookie("jwtoken1", token, { maxAge: maxAge * 1000,secure:true, sameSite:true });
-    res.cookie("jwtoken2", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie("jwtoken1", token, { maxAge: maxAge * 1000, secure: true, sameSite: true });
+    res.cookie("jwtoken2", token, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
+    res.cookie("jwtoken3", token, { maxAge: maxAge * 1000, domain: 'phrms.vercel.app' });
+    res.cookie("jwtoken4", token, { httpOnly: true, maxAge: maxAge * 1000, path: '/' });
+    res.cookie("jwtoken5", token, { httpOnly: true, maxAge: maxAge * 1000, domain: 'phrms.vercel.app', path: '/' });
+    res.cookie("jwtoken6", token, { maxAge: maxAge * 1000,sameSite: 'None' });
 
     res.status(200).json({ patient });
   } catch (err) {
