@@ -1564,7 +1564,7 @@ const Register = (props) => {
     <section className="registersection">
       <div className="container">
         <div className="registerwrapper">
-          <h1>Resgister Here</h1>
+          <h1>register Here</h1>
           <div className="registerstepper">
             {activeStep === getSteps().length ? (
               <Typography varient="h3" align="center">
