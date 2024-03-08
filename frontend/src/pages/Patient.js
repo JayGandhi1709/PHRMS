@@ -66,7 +66,8 @@ function Patient(props) {
   
   useEffect(() => {
     async function getpatient() {
-      const res = await fetch(`${BACKENDURL}/getpatient`);
+      // const res = await fetch(`${BACKENDURL}/getpatient`);
+      const res = await fetch(`https://phrms-api.vercel.app/getpatient`);
       const data = await res.json();
       // console.log(data);
       if (data.AuthError || data.patient === null) {
