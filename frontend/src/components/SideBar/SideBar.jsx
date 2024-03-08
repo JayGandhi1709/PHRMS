@@ -256,9 +256,9 @@ export default function SideBar(props) {
       }
     }
   }
-  useEffect(() => {
-    getNotification();
-  }, []);
+  // useEffect(() => {
+  //   getNotification();
+  // }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
