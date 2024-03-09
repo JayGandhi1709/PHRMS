@@ -86,7 +86,7 @@ function Patient(props) {
         }
       }
     }
-    // getpatient();
+    getpatient();
   }, [dob]);
   return (
     <div>

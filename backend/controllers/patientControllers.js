@@ -133,6 +133,7 @@ module.exports.patient_login = async (req, res) => {
     const patient = await Patient.login(healthID, password);
     const token = createToken(patient._id, "patient");
     // console.log("Token : " , token);
+    res.setHeader("jwtoken-cookie", token);
     res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.cookie("jwtoken1", token, { maxAge: maxAge * 1000, secure: true, sameSite: true });
     res.cookie("jwtoken2", token, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
