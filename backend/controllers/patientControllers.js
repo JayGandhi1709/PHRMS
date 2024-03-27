@@ -136,7 +136,7 @@ module.exports.patient_login = async (req, res) => {
     res.setHeader("jwtoken-cookie", token);
     console.log("TOken : ",token);
     console.log("maxAge : ",maxAge);
-    // console.log(cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 }));
+    console.log(cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 }));
     // res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     // res.cookie("jwtoken1", token, { maxAge: maxAge * 1000, secure: true, sameSite: true });
     // res.cookie("jwtoken2", token, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
@@ -148,7 +148,7 @@ module.exports.patient_login = async (req, res) => {
     // res.cookie("jwtoken8", token,{ httpOnly: true, maxAge: maxAge * 1000, path: '/' ,domain: 'phrms.vercel.app', sameSite: 'strict', });
     // res.cookie("jwtoken9", token,{ httpOnly: true, maxAge: maxAge * 1000, domain: 'phrms.vercel.app', sameSite: 'strict', secure: true});
 
-    res.status(200).cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 }).json({ patient });
+    res.status(200).json({ patient });
   } catch (err) {
     // console.error(err);
     const errors = handleError(err, healthID);
