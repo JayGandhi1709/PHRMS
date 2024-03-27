@@ -136,7 +136,7 @@ module.exports.patient_login = async (req, res) => {
     res.setHeader("jwtoken-cookie", token);
     console.log("TOken : ",token);
     console.log("maxAge : ",maxAge);
-    console.log(cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 }));
+    console.log(cookie("jwtoken", token, { httpOnly: true, expires: maxAge * 1000 }));
     // res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     // res.cookie("jwtoken1", token, { maxAge: maxAge * 1000, secure: true, sameSite: true });
     // res.cookie("jwtoken2", token, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
