@@ -40,7 +40,7 @@ app.use(require("./routes/notificationRoute"));
 app.use(require("./routes/appointmentRoute"));
 
 app.get("/", (req, res) => {
-  res.send(`Hello World From Apps`);
+  res.send(`Hello World From PHRMS`);
 });
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
