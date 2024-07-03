@@ -149,7 +149,7 @@ module.exports.patient_login = async (req, res) => {
     // res.cookie("jwtoken8", token,{ httpOnly: true, maxAge: maxAge * 1000, path: '/' ,domain: 'phrms.vercel.app', sameSite: 'strict', });
     // res.cookie("jwtoken9", token,{ httpOnly: true, maxAge: maxAge * 1000, domain: 'phrms.vercel.app', sameSite: 'strict', secure: true});
 
-    res.status(200).json({ patient });
+    res.status(200).json({ patient,token });
   } catch (err) {
     // console.error(err);
     const errors = handleError(err, healthID);
