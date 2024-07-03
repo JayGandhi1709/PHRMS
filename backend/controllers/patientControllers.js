@@ -128,15 +128,16 @@ module.exports.patient_register = async (req, res) => {
 };
 
 module.exports.patient_login = async (req, res) => {
+  console.log("Comming");
   const { healthID, password } = req.body;
   try {
     const patient = await Patient.login(healthID, password);
     const token = createToken(patient._id, "patient");
     // console.log("Token : " , token);
-    res.setHeader("jwtoken-cookie", token);
-    console.log("TOken : ",token);
-    console.log("maxAge : ",maxAge);
-    console.log(cookie("jwtoken", token));
+    // res.setHeader("jwtoken-cookie", token);
+    // console.log("TOken : ",token);
+    // console.log("maxAge : ",maxAge);
+    // console.log(cookie("jwtoken", token));
     // console.log(cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 }));
     // res.cookie("jwtoken", token, { httpOnly: true, maxAge: maxAge * 1000 });
     // res.cookie("jwtoken1", token, { maxAge: maxAge * 1000, secure: true, sameSite: true });
