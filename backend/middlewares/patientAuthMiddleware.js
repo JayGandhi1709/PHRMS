@@ -4,6 +4,7 @@ const Patient = require("../models/patient");
 // app.use(cookieParser());
 
 const requirePatientAuth = async (req, res, next) => {
+  console.log("Patient Auth MiddleWare : ", req.req.headers['authorization']);
   console.log("Patient Auth MiddleWare : ", req.cookies.jwtoken);
   try {
     if (req.cookies.jwtoken) {

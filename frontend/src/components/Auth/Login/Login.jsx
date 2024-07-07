@@ -78,7 +78,7 @@ const Login = (props) => {
     } else {
       setLoading(false);
       props.setHealthID(healthID);
-      localStorage.setItem("jwttoken", data.token);
+      localStorage.setItem("jwtoken", data.token);
       props.settoastCondition({
         status: "success",
         message: "Logged in Successfully!!!",

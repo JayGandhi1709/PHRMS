@@ -63,11 +63,18 @@ function Patient(props) {
     },
   });
   const [prescriptions, setPrescriptions] = useState([{}]);
-  
+
   useEffect(() => {
     async function getpatient() {
+      const token = localStorage.getItem('jwtoken');
       // const res = await fetch(`${BACKENDURL}/getpatient`);
-      const res = await fetch(`https://phrms-api.vercel.app/getpatient`);
+      const res = await fetch(`https://phrms-api.vercel.app/getpatient`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': token,
+        },
+      });
       const data = await res.json();
       // console.log(data);
       if (data.AuthError || data.patient === null) {
