@@ -5,6 +5,7 @@ const Patient = require("../models/patient");
 
 const requirePatientAuth = async (req, res, next) => {
   console.log("Patient Auth MiddleWare : ",req.cookies.jwtoken);
+  try {
   if (req.cookies.jwtoken) {
     const token = req.cookies.jwtoken;
     if (token) {
@@ -35,6 +36,9 @@ const requirePatientAuth = async (req, res, next) => {
     // console.log(AuthError);
     res.status(401).send({ AuthError });
   }
+} catch (error) {
+    console.log(error);
+}
 };
 
 module.exports = { requirePatientAuth };
