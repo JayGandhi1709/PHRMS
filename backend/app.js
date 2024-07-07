@@ -39,16 +39,6 @@ app.use(require("./routes/logoutRoute"));
 app.use(require("./routes/notificationRoute"));
 app.use(require("./routes/appointmentRoute"));
 
-app.post('/set-cookies', (req, res) => {
-  // Example logic for setting a cookie
-  res.cookie('token', 'your-token-here', {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'Strict'
-  });
-  res.json({ message: 'Login successful' });
-});
-
 app.get("/", (req, res) => {
   res.send(`Hello World From PHRMS`);
 });
