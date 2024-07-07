@@ -4,11 +4,13 @@ const Patient = require("../models/patient");
 // app.use(cookieParser());
 
 const requirePatientAuth = async (req, res, next) => {
-  console.log("Patient Auth MiddleWare : ", req.headers['authorization']);
-  console.log("Patient Auth MiddleWare : ", req.cookies.jwtoken);
+  // console.log("Patient Auth MiddleWare : ", req.headers['authorization']);
+  // console.log("Patient Auth MiddleWare : ", req.cookies.jwtoken);
   try {
-    if (req.cookies.jwtoken) {
-      const token = req.cookies.jwtoken;
+    // if (req.cookies.jwtoken) {
+    if (req.headers['authorization']) {
+      const token = req.headers['authorization'];
+      // const token = req.cookies.jwtoken;
       if (token) {
         jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
           if (err) {
