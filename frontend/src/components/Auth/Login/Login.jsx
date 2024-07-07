@@ -66,6 +66,7 @@ const Login = (props) => {
         healthID,
         password,
       }),
+      credentials: 'include'
     });
 
     const data = await res.json();
